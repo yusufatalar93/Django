@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+{% block body %}
+<div class = "container">
+
+<div class="jumbotron text-center">
+<h3> Yazılım Bilimi Bloğuna Hoşgeldiniz</h3>
+<p>Bu blogta geşitriciler olarak blog yazılarınız paylaşabilirsiniz ve insanlara yardımcı olabilirsiniz</p>
+<ul>
+{% for number in numbers %}
+<li>{{number}}</li>
+{% endfor %}
+</ul>
+{% if request.user.is_authenticated %}
+<p>
+{{request.user.username}}, hoş geldiniz
+</p>
+{% else %}
+{% endif %}
+</div>
+
+
+
+{% endblock body %}

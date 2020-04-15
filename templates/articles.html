@@ -1,0 +1,54 @@
+{% extends "layout.html" %}
+{% block body %}
+ <div class="row">
+  <div class="col-md-6 offset-md-3">
+ 
+ <h1>Makaleler</h1>
+
+ <hr><hr>
+ </div>
+</div>
+<div class="row">
+  <div class="col-md-6 offset-md-3">
+ 
+<form>
+{% csrf_token %}
+<input class="search_input" name="keyword" type="text" name="" placeholder="Ara...">
+<button type="submit" name="button" class="btn btn-danger">Ara</button>
+</form>
+</div>
+</div>
+{% if articles %}
+{% for article in articles  %}
+
+<div class="row">
+  <div class="col-md-6 offset-md-3">
+        <h3 class="mt-4">{{article.title}}</h3>
+        <p class="lead">
+          {{article.author.username}} tarafından olluşturuldu.
+        </p>
+        
+        <hr>
+        <p>{{article.created_date}}</p>
+        <hr>    
+      {% if article.article_image %}
+      <img class = "img-fluid rounded" src="{{article.article_image.url}}" alt="">
+      {% endif %}
+        <hr>
+        <p class="lead">{{article.content|safe|truncatewords:50}}</p>
+        <a href = "{%url 'article:detail' article.id%}" class= "btn btn-danger">Devamını Oku</a>
+</div>
+</div>
+
+{% endfor %}
+{% else %}
+<div class="row">
+  <div class="col-md-6 offset-md-3">
+<div class="btn btn-danger">Makale Bulunmuyor</div>
+</div>
+</div>
+{% endif %}
+
+{% endblock body %}
+<div class="row">
+  <div class="col-md-6 offset-md-3">
